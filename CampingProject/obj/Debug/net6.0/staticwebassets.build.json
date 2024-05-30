@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "GTQWxXESbmkYHtyUVHmHp+6QXLyLIsO/OWOJFTH4WxY=",
+  "Source": "CampingProject",
+  "BasePath": "_content/CampingProject",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CampingProject\\wwwroot",
+      "Source": "CampingProject",
+      "ContentRoot": "C:\\Users\\Legion\\Desktop\\Web development\\CampBNB\\CampingProject\\CampingProject\\wwwroot\\",
+      "BasePath": "_content/CampingProject",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

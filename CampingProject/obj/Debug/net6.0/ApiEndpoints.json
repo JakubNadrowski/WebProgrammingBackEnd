@@ -1,0 +1,90 @@
+[
+  {
+    "ContainingType": "CampingProject.Controllers.CampingSpotController",
+    "Method": "AddSpot",
+    "RelativePath": "api/CampingSpot/AddSpot",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spot",
+        "Type": "CampingProject.Models.CampingSpot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.CampingSpotController",
+    "Method": "GetSpots",
+    "RelativePath": "api/CampingSpot/GetAllSpots",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.UsersController",
+    "Method": "AddUser",
+    "RelativePath": "api/Users/AddUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUser",
+        "Type": "CampingProject.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.UsersController",
+    "Method": "GetUser",
+    "RelativePath": "api/Users/GetAllUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.UsersController",
+    "Method": "Login",
+    "RelativePath": "api/Users/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequest",
+        "Type": "CampingProject.Models.UserLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
