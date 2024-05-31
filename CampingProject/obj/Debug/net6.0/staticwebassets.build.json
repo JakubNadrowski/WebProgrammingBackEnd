@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GTQWxXESbmkYHtyUVHmHp+6QXLyLIsO/OWOJFTH4WxY=",
+  "Hash": "Uxv4n5M2cb4iIwMgWoSFaDsZrzhLPyutm9h1GP5jbbo=",
   "Source": "CampingProject",
   "BasePath": "_content/CampingProject",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Legion\\Desktop\\Web development\\CampBNB\\CampingProject\\CampingProject\\wwwroot\\Zrzut ekranu 2023-07-20 202938.png",
+      "SourceId": "CampingProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Legion\\Desktop\\Web development\\CampBNB\\CampingProject\\CampingProject\\wwwroot\\",
+      "BasePath": "_content/CampingProject",
+      "RelativePath": "Zrzut ekranu 2023-07-20 202938.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Zrzut ekranu 2023-07-20 202938.png"
+    }
+  ]
 }
