@@ -71,7 +71,7 @@ namespace CampingProject.Controllers
                 con.Open(); // Open the connection
 
                 // Query to retrieve image paths for the spot with given spotId
-                string query = "SELECT image_path FROM spot_images WHERE spot_id = @SpotId";
+                string query = "SELECT image_data FROM spot_images WHERE spot_id = @SpotId";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@SpotId", spotId);
@@ -79,7 +79,9 @@ namespace CampingProject.Controllers
                     {
                         while (reader.Read())
                         {
-                            imagePaths.Add(Convert.ToString(reader["image_path"]));
+                            byte[] imageData = (byte[])reader["image_data"];
+                            string base64String = Convert.ToBase64String(imageData);
+                            imagePaths.Add(base64String);
                         }
                     }
                 }
@@ -102,7 +104,6 @@ namespace CampingProject.Controllers
         {
             try
             {
-                string uploadFolder = @"C:\Users\Legion\Desktop\FrontEnd\Camping\Project 2\camping2\src\assets";
 
                 using (MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString()))
                 {
@@ -134,17 +135,18 @@ namespace CampingProject.Controllers
                     {
                         foreach (var image in spot.Images)
                         {
-                            var filePath = Path.Combine(uploadFolder, image.FileName);
-                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            byte[] imageData;
+                            using (var ms = new MemoryStream())
                             {
-                                await image.CopyToAsync(stream);
+                                await image.CopyToAsync(ms);
+                                imageData = ms.ToArray();
                             }
 
-                            string insertImageQuery = "INSERT INTO spot_images (spot_id, image_path) VALUES (@SpotId, @ImagePath)";
+                            string insertImageQuery = "INSERT INTO spot_images (spot_id, image_data) VALUES (@SpotId, @ImageData)";
                             using (MySqlCommand imageCmd = new MySqlCommand(insertImageQuery, con))
                             {
                                 imageCmd.Parameters.AddWithValue("@SpotId", spot_id);
-                                imageCmd.Parameters.AddWithValue("@ImagePath", image.FileName);
+                                imageCmd.Parameters.AddWithValue("@ImageData", imageData);
 
                                 await imageCmd.ExecuteNonQueryAsync();
                             }

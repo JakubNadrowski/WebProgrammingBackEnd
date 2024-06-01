@@ -107,9 +107,19 @@ namespace CampingProject.Controllers
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
-                            {
+                            { 
+                                await reader.ReadAsync();
+                                User user = new User();
+                                {
+                                    user.Id = Convert.ToInt32(reader["iduser"]);
+                                    user.fName = Convert.ToString(reader["fname"]);
+                                    user.lName = Convert.ToString(reader["lname"]);
+                                    user.isOwner = Convert.ToInt32(reader["owner"]);
+                                    user.email = Convert.ToString(reader["email"]);
+                                    user.password = Convert.ToString(reader["password"]);
+                                };
                                 // Authentication successful
-                                return Ok(new { success = true });
+                                return Ok(new { success = true, user});
                             }
                             else
                             {
