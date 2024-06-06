@@ -67,3 +67,4 @@ C:\Users\Legion\Desktop\Web development\CampBNB\CampingProject\CampingProject\bi
 C:\Users\Legion\Desktop\Web development\CampBNB\CampingProject\CampingProject\bin\Debug\net6.0\MongoDB.Bson.dll
 C:\Users\Legion\Desktop\Web development\CampBNB\CampingProject\CampingProject\bin\Debug\net6.0\CampingProject.staticwebassets.runtime.json
 C:\Users\Legion\Desktop\Web development\CampBNB\CampingProject\CampingProject\obj\Debug\net6.0\CampingProject.sourcelink.json
+C:\Users\Legion\Desktop\Web development\CampBNB\CampingProject\CampingProject\bin\Debug\net6.0\BCrypt.Net-Core.dll

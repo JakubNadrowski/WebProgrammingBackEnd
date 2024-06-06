@@ -15,7 +15,7 @@
 
         public int price { get; set; }
 
-        public List<IFormFile> Images { get; set; }
+        public List<IFormFile>? Images { get; set; }
 
         public List <string>? imagePaths { get; set; }
     }

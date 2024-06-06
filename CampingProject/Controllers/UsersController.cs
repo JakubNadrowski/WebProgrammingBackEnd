@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BCrypt.Net;
 
 namespace CampingProject.Controllers
 {
@@ -90,7 +91,7 @@ namespace CampingProject.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(UserLoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
             try
             {
@@ -98,32 +99,42 @@ namespace CampingProject.Controllers
                 {
                     await con.OpenAsync();
 
-                    string query = "SELECT * FROM user WHERE email = @Email AND password = @Password";
+                    string query = "SELECT * FROM user WHERE email = @Email";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@Email", loginRequest.email);
-                        cmd.Parameters.AddWithValue("@Password", loginRequest.password);
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
-                            { 
+                            {
                                 await reader.ReadAsync();
-                                User user = new User();
+                                string storedHash = Convert.ToString(reader["password"]);
+
+                                if (BCrypt.Net.BCrypt.Verify(loginRequest.password, storedHash))
                                 {
-                                    user.Id = Convert.ToInt32(reader["iduser"]);
-                                    user.fName = Convert.ToString(reader["fname"]);
-                                    user.lName = Convert.ToString(reader["lname"]);
-                                    user.isOwner = Convert.ToInt32(reader["owner"]);
-                                    user.email = Convert.ToString(reader["email"]);
-                                    user.password = Convert.ToString(reader["password"]);
-                                };
-                                // Authentication successful
-                                return Ok(new { success = true, user});
+                                    User user = new User
+                                    {
+                                        Id = Convert.ToInt32(reader["iduser"]),
+                                        fName = Convert.ToString(reader["fname"]),
+                                        lName = Convert.ToString(reader["lname"]),
+                                        isOwner = Convert.ToInt32(reader["owner"]),
+                                        email = Convert.ToString(reader["email"]),
+                                        // Don't send the password back to the client
+                                    };
+
+                                    // Authentication successful
+                                    return Ok(new { success = true, user });
+                                }
+                                else
+                                {
+                                    // Authentication failed
+                                    return Ok(new { success = false });
+                                }
                             }
                             else
                             {
-                                // Authentication failed
+                                // No user found with the provided email
                                 return Ok(new { success = false });
                             }
                         }

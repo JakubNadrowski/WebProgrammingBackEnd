@@ -98,6 +98,53 @@ namespace CampingProject.Controllers
             return imagePaths;
         }
 
+        [HttpPut]
+        [Route("UpdateSpot")]
+        public string UpdateSpot([FromBody] CampingSpot spot)
+        {
+            Response response = new Response();
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString()))
+                {
+                    con.Open();
+
+                    string query = "UPDATE campingspot SET owner = @Owner, name = @Name, location = @Location, description = @Description, capacity = @Capacity, price = @Price WHERE idcampingspot = @Id";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@Id", spot.id);
+                    cmd.Parameters.AddWithValue("@Owner", spot.owner);
+                    cmd.Parameters.AddWithValue("@Name", spot.name);
+                    cmd.Parameters.AddWithValue("@Location", spot.location);
+                    cmd.Parameters.AddWithValue("@Description", spot.description);
+                    cmd.Parameters.AddWithValue("@Capacity", spot.capacity);
+                    cmd.Parameters.AddWithValue("@Price", spot.price);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        response.StatusCode = 200;
+                        response.ErrorMessage = "Camping spot updated successfully";
+                    }
+                    else
+                    {
+                        response.StatusCode = 100;
+                        response.ErrorMessage = "No spot found with the provided ID";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = 500;
+                response.ErrorMessage = $"Error: {ex.Message}";
+            }
+
+            return JsonSerializer.Serialize(response);
+        }
+
+
         [HttpPost]
         [Route("AddSpot")]
         public async Task<IActionResult> AddSpot([FromForm]CampingSpot spot)

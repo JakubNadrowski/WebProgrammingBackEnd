@@ -76,6 +76,32 @@
     ]
   },
   {
+    "ContainingType": "CampingProject.Controllers.CampingSpotController",
+    "Method": "UpdateSpot",
+    "RelativePath": "api/CampingSpot/UpdateSpot",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spot",
+        "Type": "CampingProject.Models.CampingSpot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "CampingProject.Controllers.UsersController",
     "Method": "AddUser",
     "RelativePath": "api/Users/AddUser",
