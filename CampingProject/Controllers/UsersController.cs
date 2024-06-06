@@ -146,5 +146,49 @@ namespace CampingProject.Controllers
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
+
+        [HttpPut]
+        [Route("UpdateUser")]
+        public string UpdateSpot([FromBody] User user)
+        {
+            Response response = new Response();
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString()))
+                {
+                    con.Open();
+
+                    string query = "UPDATE user SET fname = @Fname, lname = @Lname, email = @Email, password = @Password WHERE iduser = @Id";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@Id", user.Id);
+                    cmd.Parameters.AddWithValue("@Fname", user.fName);
+                    cmd.Parameters.AddWithValue("@Lname", user.lName);
+                    cmd.Parameters.AddWithValue("@Email", user.email);
+                    cmd.Parameters.AddWithValue("@Password", user.password);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        response.StatusCode = 200;
+                        response.ErrorMessage = "User data updated successfully";
+                    }
+                    else
+                    {
+                        response.StatusCode = 100;
+                        response.ErrorMessage = "No user found with the provided ID";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = 500;
+                response.ErrorMessage = $"Error: {ex.Message}";
+            }
+
+            return JsonSerializer.Serialize(response);
+        }
     }
 }
