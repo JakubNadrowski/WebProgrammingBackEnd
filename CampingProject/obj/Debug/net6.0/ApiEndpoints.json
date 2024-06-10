@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "CampingProject.Controllers.BookingController",
+    "Method": "AddBooking",
+    "RelativePath": "api/Booking/AddBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "booking",
+        "Type": "CampingProject.Models.Booking",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.BookingController",
+    "Method": "GetAllBookings",
+    "RelativePath": "api/Booking/GetAllBookings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CampingProject.Controllers.CampingSpotController",
     "Method": "AddSpot",
     "RelativePath": "api/CampingSpot/AddSpot",
