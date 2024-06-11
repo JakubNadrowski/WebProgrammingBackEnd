@@ -96,6 +96,40 @@ namespace CampingProject.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("RemoveBooking")]
+        public async Task<IActionResult> RemoveBooking(int bookingID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString()))
+                {
+                    await con.OpenAsync();
+
+                    string query = "DELETE FROM bookings WHERE idbookings = @bookingID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@bookingID", bookingID);
+
+                        int affectedRows = await cmd.ExecuteNonQueryAsync();
+
+                        if (affectedRows > 0)
+                        {
+                            return Ok("Booking removed successfully.");
+                        }
+                        else
+                        {
+                            return NotFound("Booking not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
 
 
 

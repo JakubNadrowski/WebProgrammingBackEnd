@@ -26,6 +26,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CampingProject.Controllers.BookingController",
+    "Method": "RemoveBooking",
+    "RelativePath": "api/Booking/RemoveBooking",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CampingProject.Controllers.CampingSpotController",
     "Method": "AddSpot",
     "RelativePath": "api/CampingSpot/AddSpot",
@@ -83,6 +99,32 @@
   },
   {
     "ContainingType": "CampingProject.Controllers.CampingSpotController",
+    "Method": "DeleteSpot",
+    "RelativePath": "api/CampingSpot/DeleteSpot",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spotId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.CampingSpotController",
     "Method": "GetSpots",
     "RelativePath": "api/CampingSpot/GetAllSpots",
     "HttpMethod": "GET",
@@ -113,6 +155,68 @@
         "Name": "spot",
         "Type": "CampingProject.Models.CampingSpot",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.CommentController",
+    "Method": "AddComment",
+    "RelativePath": "api/Comment/AddComment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newComment",
+        "Type": "CampingProject.Models.Comment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.CommentController",
+    "Method": "GetComments",
+    "RelativePath": "api/Comment/GetAllComments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CampingProject.Controllers.CommentController",
+    "Method": "GetCommentsBySpotId",
+    "RelativePath": "api/Comment/GetCommentsBySpotId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spotId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [

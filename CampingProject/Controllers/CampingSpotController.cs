@@ -211,6 +211,41 @@ namespace CampingProject.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("DeleteSpot")]
+        public string DeleteSpot(int spotId)
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString());
+                con.Open();
+
+                // Delete records from the images table with the spot ID
+                MySqlCommand deleteImagesCmd = new MySqlCommand($"DELETE FROM spot_images WHERE spot_id = {spotId}", con);
+                deleteImagesCmd.ExecuteNonQuery();
+
+                // Delete records from the bookings table with the spot ID
+                MySqlCommand deleteBookingsCmd = new MySqlCommand($"DELETE FROM bookings WHERE spotID = {spotId}", con);
+                deleteBookingsCmd.ExecuteNonQuery();
+
+                // Delete records from the comments table with the spot ID
+                MySqlCommand deleteCommentsCmd = new MySqlCommand($"DELETE FROM comments WHERE campingspotid = {spotId}", con);
+                deleteCommentsCmd.ExecuteNonQuery();
+
+                // Finally, delete the spot itself
+                MySqlCommand deleteSpotCmd = new MySqlCommand($"DELETE FROM campingspot WHERE idcampingspot = {spotId}", con);
+                deleteSpotCmd.ExecuteNonQuery();
+
+                con.Close();
+
+                return "Spot and associated records deleted successfully.";
+            }
+            catch (Exception ex)
+            {
+                return $"Error deleting spot: {ex.Message}";
+            }
+        }
+
 
     }
 }
